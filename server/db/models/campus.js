@@ -4,7 +4,6 @@ const images = [
     'http://www.utoledo.edu/offices/marketing/toolkit/images/UT-logo-horizontal-color-gold-rgb-300.jpg',
     'http://www.drury.edu/uc/logo/DruryVerticalCrest1.jpg',
     'https://www.miamioh.edu/_files/images/ucm/resources/logo/FSL_186K.jpg',
-    'https://upload.wikimedia.org/wikipedia/en/f/f8/Alliance_University_logo.jpg'
   ];
 
 const getRandomImages = () => images[Math.floor(Math.random() * images.length)];
@@ -31,4 +30,3 @@ const Campus = db.define('campus', {
 
 module.exports = Campus;
 
-/* !!!!! imageUrl default value */

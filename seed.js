@@ -17,17 +17,16 @@ const campuses = [
     {name: 'UBC', description: "University of British Columbia"},
     {name: 'TOLEDO', description: "University of Toledo"},
     {name: 'Drury', description: "University of Drury"},
-    {name: 'MIAMI', description: "University of Miami"},
-    {name: 'ALLIANCE', description: "University of Alliance"}
-];
+    {name: 'MIAMI', description: "University of Miami"}
+  ];
 
 const seed = () =>
-Promise.all(students.map(student =>
-  Student.create(student))
-)
-.then(() =>
 Promise.all(campuses.map(campus =>
   Campus.create(campus))
+)
+.then(() =>
+Promise.all(students.map(student =>
+  Student.create({...student, campusId: Math.floor((Math.random() * 4) + 1)}))
 ));
 
 const main = () => {
