@@ -29,8 +29,7 @@ const Student = db.define('student', {
         get () {
            return this.getDataValue('firstName') + this.getDataValue('lastName'); 
         }
-    },
-    
+    }
 });
 
 module.exports = Student;
