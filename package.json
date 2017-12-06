@@ -1,10 +1,11 @@
 {
-  "name": "Project Name",
+  "name": "Senior-Enrichment",
   "version": "0.0.1",
   "description": "A review time project",
   "main": "index.js",
   "scripts": {
     "start:dev": "webpack -w & nodemon main",
+    "seed": "node seed.js",
     "start": "node main"
   },
   "keywords": [

@@ -1,5 +1,6 @@
 'use strict';
-
+const Student = require('./student');
+const Campus = require('./campus');
 const db = require('../index');
 
 // Require all the models
@@ -9,4 +10,11 @@ const db = require('../index');
 
 // This is also probably a good place for you to set up your associations
 
-module.exports = db
+Student.belongsTo(Campus);
+Campus.hasMany(Student);
+
+module.exports = {
+	db,
+	Student,
+	Campus
+};
