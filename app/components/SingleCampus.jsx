@@ -3,12 +3,17 @@ import store from '../store';
 import { fetchCampus } from '../reducers';
 
 export default class SingleCampus extends Component {
+    constructor(){
+        super();
+        this.state = store.getState();
+    }
 
     fetchingCampus(campusId) {
         store.dispatch(fetchCampus(campusId));
     }
 
     componentDidMount(){
+        this.unsubscribe = store.subscribe(() => this.setState(store.getState()));        
         const campusId = this.props.match.params.campusId;
         this.fetchingCampus(campusId);
     }
@@ -20,11 +25,14 @@ export default class SingleCampus extends Component {
             this.fetchingCampus(nextCampusId);
         }
     }
+
+    componentWillUnmount(){
+        this.unsubscribe();
+    }
     
     render(){
-        const { students, selectedCampus } = store.getState();
-        console.log('state', store.getState());
-        
+        const { students, selectedCampus } = this.state;
+
         return (
         <div className="singlecampus">
             {
@@ -46,4 +54,3 @@ export default class SingleCampus extends Component {
         )
     }
 };
-

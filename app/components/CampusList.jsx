@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import store from '../store';
 
-//1. fetch all the classes
-//2. attach them to the buttons/links
-
 export default class CampusList extends Component {
     constructor(){
         super();
