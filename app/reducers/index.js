@@ -8,8 +8,8 @@ const initialState = {
   campuses: [],
   newStudentEntry: '',
   newCampusEntry: '',
-  singleCampus: '',
-  singleStudent: ''
+  selectedCampus: {},
+  selectedStudent: {}
 }
 
 //Action types
@@ -19,6 +19,8 @@ const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUSE = 'GET_CAMPUSE';
 const WRITE_STUDENT = 'WRITE_STUDENT';
 const WRITE_CAMPUS = 'WRITE_CAMPUS';
+const SELECT_CAMPUS = 'SELECT_CAMPUS';
+const SELECT_STUDENT = 'SELECT_STUDENT';
 
 //Action creators
 export const getStudents = (students) => {
@@ -63,6 +65,20 @@ export const writeCampus = (newCampusEntry) => {
   }
 }
 
+export const selectCampus = (selectedCampus) => {
+  return {
+    type: SELECT_CAMPUS,
+    selectedCampus
+  }
+}
+
+export const selectStudent = (selectedStudent) => {
+  return {
+    type: SELECT_STUDENT,
+    selectedStudent
+  }
+}
+
 //Thunk Creator
 export const fetchStudents = () => {
   return function thunk(dispatch){
@@ -84,6 +100,16 @@ export const postStudents = (newStudent) => {
   };
 };
 
+export const fetchStudent = (studentId) => {
+  return function thunk(dispatch){
+    return axios.get(`/api/students/${studentId}`)
+      .then(res => res.data)
+      .then(student => {
+        dispatch(selectStudent(student));
+      })
+  }
+}
+
 export const fetchCampuses = () => {
   return function thunk(dispatch){
     return axios.get('/api/campuses')
@@ -99,7 +125,7 @@ export const fetchCampus = (campusId) => {
     return axios.get(`/api/campuses/${campusId}`)
       .then(res => res.data)
       .then(campus => {
-
+        dispatch(selectCampus(campus));
       })
   }
 }
@@ -128,6 +154,10 @@ const rootReducer = function(state = initialState, action) {
       return { ...state, campuses: [...state.campuses, action.campus]};
     case WRITE_CAMPUS:
       return { ...state, newCampusEntry: action.newCampusEntry};
+    case SELECT_CAMPUS:
+      return { ...state, selectedCampus: action.selectedCampus};
+    case SELECT_STUDENT:
+      return { ...state, selectedStudent: action.selectedStudent};
     default: return state
   }
 };

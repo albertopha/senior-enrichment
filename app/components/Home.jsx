@@ -9,10 +9,10 @@ import store from '../store';
 
 export default class Home extends Component {
     componentDidMount(){
-        const campuses = fetchCampuses();
-        const students = fetchStudents();
-        store.dispatch(campuses);
-        store.dispatch(students);
+        const campusesThunk = fetchCampuses();
+        const studentsThunk = fetchStudents();
+        store.dispatch(campusesThunk);
+        store.dispatch(studentsThunk);
     }
     render(){
         return (

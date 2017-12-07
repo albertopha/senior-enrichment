@@ -20,7 +20,6 @@ export default class CampusList extends Component {
     }
 
     render(){
-        console.log('checking the state', this.state);
         const allCampuses = this.state.campuses;
         return (
             <div id="campuseslist" className="row">
@@ -28,7 +27,7 @@ export default class CampusList extends Component {
                     allCampuses.map(campus => {
                         return(
                             <div className="col-xs-4" key={campus.id}>
-                                <Link className="thumbnail" to="/campuses">
+                                <Link className="thumbnail" to={`/campuses/${campus.id}`}>
                                     <img className="campusesImg" src={ campus.imageUrl } />
                                     <div className="caption">
                                         <h5>
