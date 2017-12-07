@@ -34,19 +34,19 @@ router.post('/', (req, res, next) => {
 });
 
 // PUT /api/campuses/campuseId
-router.put('/:campuseId', (req, res, next) => {
-    const campuseId = req.params.campuseId;
+router.put('/:campusId', (req, res, next) => {
+    const campusId = req.params.campusId;
 
-    Campus.findById(campuseId)
+    Campus.findById(campusId)
     .then(campus => {
         campus.update(req.body);
     })
     .catch(next);
 });
 
-// DELETE /api/campuses/campuseId
-router.delete('/:campuseId', (req, res, next) => {
-    const id = req.params.campuseId;
+// DELETE /api/campuses/campusId
+router.delete('/:campusId', (req, res, next) => {
+    const id = req.params.campusId;
 
     Campus.destroy({
         where: {id}

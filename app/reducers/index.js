@@ -7,7 +7,9 @@ const initialState = {
   students: [],
   campuses: [],
   newStudentEntry: '',
-  newCampusEntry: ''
+  newCampusEntry: '',
+  singleCampus: '',
+  singleStudent: ''
 }
 
 //Action types
@@ -91,6 +93,16 @@ export const fetchCampuses = () => {
       });
   };
 };
+
+export const fetchCampus = (campusId) => {
+  return function thunk(dispatch){
+    return axios.get(`/api/campuses/${campusId}`)
+      .then(res => res.data)
+      .then(campus => {
+
+      })
+  }
+}
 
 export const postCampus = (newCampus) => {
   return function thunk(dispatch){

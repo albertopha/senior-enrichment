@@ -28,7 +28,7 @@ export default class CampusList extends Component {
                     allCampuses.map(campus => {
                         return(
                             <div className="col-xs-4" key={campus.id}>
-                                <Link className="thumbnail" to="LINK_TO_FILL_IN">
+                                <Link className="thumbnail" to="/campuses">
                                     <img className="campusesImg" src={ campus.imageUrl } />
                                     <div className="caption">
                                         <h5>
@@ -37,7 +37,7 @@ export default class CampusList extends Component {
                                         <small>{ campus.description } songs</small>
                                     </div>
                                 </Link>
-                            </div>                            
+                            </div>
                         )
                     })
                 }
