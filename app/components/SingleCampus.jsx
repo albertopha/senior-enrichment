@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import store from '../store';
+import { Link } from 'react-router-dom';
 import { fetchCampus } from '../reducers';
 
 export default class SingleCampus extends Component {
@@ -45,7 +46,7 @@ export default class SingleCampus extends Component {
                 .map(selectedStudent => {
                     return (
                         <ul key={selectedStudent.id}>
-                            <li>{ selectedStudent.name }</li>
+                            <li><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link></li>
                         </ul>
                     )
                 })
