@@ -9,7 +9,8 @@ const initialState = {
   newStudentEntry: '',
   newCampusEntry: '',
   selectedCampus: {},
-  selectedStudent: {}
+  selectedStudent: {},    //DO I NEED THIS?!
+  studentToDelete: {}
 }
 
 //Action types
@@ -20,7 +21,8 @@ const GET_CAMPUSE = 'GET_CAMPUSE';
 const WRITE_STUDENT = 'WRITE_STUDENT';
 const WRITE_CAMPUS = 'WRITE_CAMPUS';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
-const SELECT_STUDENT = 'SELECT_STUDENT';
+const SELECT_STUDENT = 'SELECT_STUDENT'; // DO I NEED THIS?!
+const DELETE_STUDENT = 'DELETE_STUDENT';
 
 //Action creators
 export const getStudents = (students) => {
@@ -41,6 +43,20 @@ export const writeStudent = (newStudentEntry) => {
   return {
     type: WRITE_STUDENT,
     newStudentEntry
+  }
+}
+
+export const selectStudent = (selectedStudent) => {
+  return {
+    type: SELECT_STUDENT,
+    selectedStudent
+  }
+}
+
+export const deleteStudent = (studentToDelete) => {
+  return {
+    type: DELETE_STUDENT,
+    studentToDelete
   }
 }
 
@@ -72,12 +88,7 @@ export const selectCampus = (selectedCampus) => {
   }
 }
 
-export const selectStudent = (selectedStudent) => {
-  return {
-    type: SELECT_STUDENT,
-    selectedStudent
-  }
-}
+
 
 //Thunk Creator
 export const fetchStudents = () => {
@@ -100,15 +111,24 @@ export const postStudents = (newStudent) => {
   };
 };
 
-export const fetchStudent = (studentId) => {
-  return function thunk(dispatch){
+export const fetchStudent = (studentId, dispatch) => {
     return axios.get(`/api/students/${studentId}`)
       .then(res => res.data)
-      .then(student => {
-        dispatch(selectStudent(student));
+      .then(studentToDelete => {
+        console.log('student? ', studentToDelete);
+        return dispatch(deleteStudent(studentToDelete));
       })
+};
+
+export const destroyStudent = (studentId) => {
+  return function thunk(dispatch){
+    fetchStudent(studentId, dispatch)
+    .then(() => {
+      axios.delete(`/api/students/${studentId}`)      
+    })
   }
 }
+
 
 export const fetchCampuses = () => {
   return function thunk(dispatch){
@@ -158,6 +178,10 @@ const rootReducer = function(state = initialState, action) {
       return { ...state, selectedCampus: action.selectedCampus};
     case SELECT_STUDENT:
       return { ...state, selectedStudent: action.selectedStudent};
+    case DELETE_STUDENT:
+      let studentsSoFar = [...state.students];
+      studentsSoFar = studentsSoFar.filter(student => student.id !== action.studentToDelete.id);
+      return { ...state, students: studentsSoFar};
     default: return state
   }
 };
