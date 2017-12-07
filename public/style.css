@@ -8,7 +8,12 @@
   #main {
     padding-left: 0; 
   }
-  
-  .campusesImg {
-    height: 30%;
+
+  #campuseslist {
+    display: flex;
+    align-items: stretch;
+  }
+
+  #allcampuses {
+    height: 300px;
   }

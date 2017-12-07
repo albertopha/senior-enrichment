@@ -9,7 +9,7 @@ const initialState = {
   newStudentEntry: '',
   newCampusEntry: '',
   selectedCampus: {},
-  selectedStudent: {},    //DO I NEED THIS?!
+  selectedStudent: {},
   studentToDelete: {}
 }
 
@@ -21,7 +21,7 @@ const GET_CAMPUSE = 'GET_CAMPUSE';
 const WRITE_STUDENT = 'WRITE_STUDENT';
 const WRITE_CAMPUS = 'WRITE_CAMPUS';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
-const SELECT_STUDENT = 'SELECT_STUDENT'; // DO I NEED THIS?!
+const SELECT_STUDENT = 'SELECT_STUDENT';
 const DELETE_STUDENT = 'DELETE_STUDENT';
 
 //Action creators
@@ -111,18 +111,28 @@ export const postStudents = (newStudent) => {
   };
 };
 
-export const fetchStudent = (studentId, dispatch) => {
+export const fetchStudent = (studentId) => {
+  return function thunk(dispatch){
+    return axios.get(`/api/students/${studentId}`)
+    .then(res => res.data)
+    .then(selectedStudent => {
+      dispatch(selectStudent(selectedStudent));
+    });
+  };
+};
+
+//helper function for destroyStudent to find specific student
+const fetchStudentTodelete = (studentId, dispatch) => {
     return axios.get(`/api/students/${studentId}`)
       .then(res => res.data)
       .then(studentToDelete => {
-        console.log('student? ', studentToDelete);
         return dispatch(deleteStudent(studentToDelete));
       })
 };
 
 export const destroyStudent = (studentId) => {
   return function thunk(dispatch){
-    fetchStudent(studentId, dispatch)
+    fetchStudentTodelete(studentId, dispatch)
     .then(() => {
       axios.delete(`/api/students/${studentId}`)      
     })

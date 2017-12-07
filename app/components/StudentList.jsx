@@ -24,7 +24,6 @@ export default class StudentList extends Component {
 
     render(){
         const { students, campuses } = this.state;
-
         return (
             <div id="studentslist">
                 <table className='table'>
@@ -39,16 +38,16 @@ export default class StudentList extends Component {
                     <tbody>
                         {
                             students.map(student => (
-                            <tr key={student.id}>
-                                <td>{ student.id }</td>
-                                <td>{ student.name }</td>
-                                <td>{ campuses.find(campus => campus.id === student.campusId).name }</td>
-                                <td>
-                                <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(student.id)}>
-                                    <span value={student.id} >Delete</span>
-                                </button>
-                                </td>
-                            </tr>
+                                <tr key={student.id}>
+                                    <td>{ student.id }</td>
+                                    <td>{ student.name }</td>
+                                    <td>{ campuses.find(campus => campus.id === student.campusId).name }</td>
+                                    <td>
+                                    <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(student.id)}>
+                                        <span value={student.id} >Delete</span>
+                                    </button>
+                                    </td>
+                                </tr>
                             ))
                         }
                     </tbody>

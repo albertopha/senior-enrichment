@@ -23,7 +23,7 @@ export default class CampusList extends Component {
                 {
                     allCampuses.map(campus => {
                         return(
-                            <div className="col-xs-4" key={campus.id}>
+                            <div className="col-xs-4" id="allcampuses" key={campus.id}>
                                 <Link className="thumbnail" to={`/campuses/${campus.id}`}>
                                     <img className="campusesImg" src={ campus.imageUrl } />
                                     <div className="caption">
