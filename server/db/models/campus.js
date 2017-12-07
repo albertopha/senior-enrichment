@@ -1,4 +1,5 @@
 'use strict';
+
 const images = [
     'http://med-fom-prep.sites.olt.ubc.ca/files/2013/07/UBC-logo1.jpg',
     'http://www.utoledo.edu/offices/marketing/toolkit/images/UT-logo-horizontal-color-gold-rgb-300.jpg',
@@ -6,7 +7,8 @@ const images = [
     'https://www.miamioh.edu/_files/images/ucm/resources/logo/FSL_186K.jpg',
   ];
 
-const getRandomImages = () => images[Math.floor(Math.random() * images.length)];
+let count = -1;
+const getImages = () => images[count];
 
 const db = require('../index');
 const Sequelize = db.Sequelize;
@@ -20,7 +22,8 @@ const Campus = db.define('campus', {
     imageUrl: {
         type: Sequelize.STRING,
         defaultValue () {
-            return getRandomImages();
+            count++;
+            return getImages();
         }
     },
     description: {

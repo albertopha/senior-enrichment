@@ -19,42 +19,42 @@ const WRITE_STUDENT = 'WRITE_STUDENT';
 const WRITE_CAMPUS = 'WRITE_CAMPUS';
 
 //Action creators
-const getStudents = (students) => {
+export const getStudents = (students) => {
   return {
     type: GET_STUDENTS,
     students
   }
 }
 
-const getStudent = (student) => {
+export const getStudent = (student) => {
   return {
     type: GET_STUDENT,
     student
   }
 }
 
-const writeStudent = (newStudentEntry) => {
+export const writeStudent = (newStudentEntry) => {
   return {
     type: WRITE_STUDENT,
     newStudentEntry
   }
 }
 
-const getCampuses = (campuses) => {
+export const getCampuses = (campuses) => {
   return {
     type: GET_CAMPUSES,
     campuses
   }
 };
 
-const getCampus = (campus) => {
+export const getCampus = (campus) => {
   return {
     type: GET_CAMPUSE,
     campus
   }
 };
 
-const writeCampus = (newCampusEntry) => {
+export const writeCampus = (newCampusEntry) => {
   return {
     type: WRITE_CAMPUS,
     newCampusEntry
@@ -62,7 +62,7 @@ const writeCampus = (newCampusEntry) => {
 }
 
 //Thunk Creator
-const fetchStudents = () => {
+export const fetchStudents = () => {
   return function thunk(dispatch){
     return axios.get('/api/students')
     .then(res => res.data)
@@ -72,7 +72,7 @@ const fetchStudents = () => {
   };
 };
 
-const postStudents = (newStudent) => {
+export const postStudents = (newStudent) => {
   return function thunk(dispatch){
     return axios.post('/api/students', newStudent)
     .then(res => res.data)
@@ -82,7 +82,7 @@ const postStudents = (newStudent) => {
   };
 };
 
-const fetchCampuses = () => {
+export const fetchCampuses = () => {
   return function thunk(dispatch){
     return axios.get('/api/campuses')
       .then(res => res.data)
@@ -92,7 +92,7 @@ const fetchCampuses = () => {
   };
 };
 
-const postCampus = (newCampus) => {
+export const postCampus = (newCampus) => {
   return function thunk(dispatch){
     return axios.post('/api/campuses', newCampus)
       .then(res => res.data)
