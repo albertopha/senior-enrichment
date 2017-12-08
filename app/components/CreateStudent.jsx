@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import store from '../store';
 import { postStudents } from '../reducers';
 
-export default class AddStudent extends Component {
+export default class CreateStudent extends Component {
     constructor(){
         super();
         this.state = { ...store.getState(), newFNameEntry: '', newLNameEntry:'',

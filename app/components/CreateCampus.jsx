@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import store from '../store';
 import { postCampus } from '../reducers';
 
-export default class AddCampus extends Component {
+export default class CreateCampus extends Component {
     constructor(){
         super();
         this.state = { ...store.getState(), newName: '', newImgUrl:'',

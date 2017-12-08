@@ -4,8 +4,8 @@ import Campuses from './CampusList';
 import Students from './StudentList';
 import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
-import AddStudent from './AddStudent';
-import AddCampus from './AddCampus';
+import CreateStudent from './CreateStudent';
+import CreateCampus from './CreateCampus';
 import Footer from './Footer';
 import { fetchCampuses, fetchStudents } from '../reducers';
 import store from '../store';
@@ -30,8 +30,8 @@ export default class Home extends Component {
                     <div className="col-xs-10">
                         <Switch>
                             <Route exact path="/campuses" component={Campuses}/>
-                            <Route exact path="/add/students" component={AddStudent} />
-                            <Route exact path="/add/campuses" component={AddCampus} />
+                            <Route exact path="/create/students" component={CreateStudent} />
+                            <Route exact path="/create/campuses" component={CreateCampus} />
                             <Route exact path="/campuses/:campusId" component={SingleCampus}/>
                             <Route exact path="/students" component={Students} />
                             <Route exact path="/students/:studentId" component={SingleStudent} />

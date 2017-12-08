@@ -8,10 +8,10 @@ const Footer = (props) => {
       <div>
         <div className="pull-left">
             <button className="btn btn-default">
-               <Link to="/add/campuses">ADD Campus</Link>
+               <Link to="/create/campuses">Create Campus</Link>
             </button>
             <button className="btn btn-default">
-                <Link to="/add/students">ADD Student</Link>
+                <Link to="/create/students">Create Student</Link>
             </button>
         </div>
       </div>
