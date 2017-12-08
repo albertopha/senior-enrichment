@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import store from '../store';
 import { Link } from 'react-router-dom';
-import { fetchCampus } from '../reducers';
+import { fetchCampus, selectCampus } from '../reducers';
 
 export default class SingleCampus extends Component {
     constructor(){
@@ -45,12 +45,17 @@ export default class SingleCampus extends Component {
                 students.filter(student => student.campusId === selectedCampus.id)
                 .map(selectedStudent => {
                     return (
-                        <ul key={selectedStudent.id}>
-                            <li><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link></li>
-                        </ul>
+                        <div key={selectedStudent.id}>
+                            <ul >
+                                <li><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link></li>
+                            </ul>
+                        </div>
                     )
                 })
             }
+            <br/>
+            <p> Description: </p>
+            <small>{selectedCampus.description}</small>            
         </div>
         )
     }

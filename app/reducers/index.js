@@ -6,8 +6,8 @@ import axios from 'axios';
 const initialState = {
   students: [],
   campuses: [],
-  newStudentEntry: '',
-  newCampusEntry: '',
+  newStudentEntry: {},
+  newCampusEntry: {},
   selectedCampus: {},
   selectedStudent: {},
   studentToDelete: {}
@@ -175,7 +175,7 @@ const rootReducer = function(state = initialState, action) {
     case GET_STUDENTS:
       return { ...state, students: action.students };
     case GET_STUDENT:
-      return { ...state, students: [...state.students, action.newStudentEntry]};
+      return { ...state, students: [...state.students, action.student]};
     case WRITE_STUDENT:
       return { ...state, newStudentEntry: action.newStudentEntry};
     case GET_CAMPUSES:
