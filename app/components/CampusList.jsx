@@ -30,7 +30,7 @@ export default class CampusList extends Component {
                                         <h5>
                                             <span>{ campus.name }</span>
                                         </h5>
-                                        <small>{ campus.description } songs</small>
+                                        <small>{ campus.description }</small>
                                     </div>
                                 </Link>
                             </div>

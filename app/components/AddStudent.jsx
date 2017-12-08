@@ -64,54 +64,54 @@ export default class AddStudent extends Component {
     render(){
         const { campuses } = this.state;
         return (
-            <form id="new-message-form" onSubmit={this.handleSubmit}>
+            <form id="new-student-form" onSubmit={this.handleSubmit}>
                 <div className="input-group input-group-lg">
-                <input
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="firstname"
+                        value={this.state.newFNameEntry}
+                        onChange={this.handleFNameChange}
+                        placeholder="Enter Your First Name"
+                    />
+                    <input
                     className="form-control"
                     type="text"
-                    name="firstname"
-                    value={this.state.newFNameEntry}
-                    onChange={this.handleFNameChange}
-                    placeholder="Enter Your First Name"
-                />
-                <input
-                className="form-control"
-                type="text"
-                name="lastname"
-                value={this.state.newLNameEntry}
-                onChange={this.handleLNameChange}
-                placeholder="Enter Your Last Name"
-                />
-                <input
-                className="form-control"
-                type="text"
-                name="email"
-                value={this.state.newEmailEntry}
-                onChange={this.handleEmailChange}
-                placeholder="Enter Your Email"
-                 />
-                 <input
-                 className="form-control"
-                 type="number"
-                 name="gpa"
-                 value={this.state.newGpaEntry}
-                 onChange={this.handleGpaChange}
-                 placeholder="Enter Your GPA"
-                  />
-                  <select
-                  className="form-control"
-                  name="campuses"
-                  required
-                  onChange={this.handleSelectChange}>
-                  {
-                    campuses && campuses.map(campus => (
-                      <option key={campus.id} value={campus.id}>{campus.name}</option>
-                    ))
-                  }
-                  </select>
-                <span className="input-group-btn">
-                    <button className="btn btn-default" type="submit">Create</button>
-                </span>
+                    name="lastname"
+                    value={this.state.newLNameEntry}
+                    onChange={this.handleLNameChange}
+                    placeholder="Enter Your Last Name"
+                    />
+                    <input
+                    className="form-control"
+                    type="text"
+                    name="email"
+                    value={this.state.newEmailEntry}
+                    onChange={this.handleEmailChange}
+                    placeholder="Enter Your Email"
+                    />
+                    <input
+                    className="form-control"
+                    type="number"
+                    name="gpa"
+                    value={this.state.newGpaEntry}
+                    onChange={this.handleGpaChange}
+                    placeholder="Enter Your GPA"
+                    />
+                    <select
+                    className="form-control"
+                    name="campuses"
+                    required
+                    onChange={this.handleSelectChange}>
+                    {
+                        campuses && campuses.map(campus => (
+                        <option key={campus.id} value={campus.id}>{campus.name}</option>
+                        ))
+                    }
+                    </select>
+                    <span className="input-group-btn">
+                        <button className="btn btn-default" type="submit">Create Student</button>
+                    </span>
                 </div>
             </form>
         )

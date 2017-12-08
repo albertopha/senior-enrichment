@@ -22,7 +22,7 @@ const campuses = [
 
 const seed = () =>
 Promise.all(campuses.map(campus =>
-  Campus.create(campus))
+  Campus.create(campus, {include: [Student]}))
 )
 .then(() =>
 Promise.all(students.map(student =>
