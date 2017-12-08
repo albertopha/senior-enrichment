@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import store from '../store';
+import { destroyCampus } from '../reducers';
 
 export default class CampusList extends Component {
     constructor(){
@@ -16,6 +17,10 @@ export default class CampusList extends Component {
         this.unsubscribe();
     }
 
+    clickHandler(campusId) {
+        store.dispatch(destroyCampus(campusId));
+    }
+
     render(){
         const allCampuses = this.state.campuses;
         return (
@@ -24,15 +29,20 @@ export default class CampusList extends Component {
                     allCampuses.map(campus => {
                         return(
                             <div className="col-xs-4" id="allcampuses" key={campus.id}>
-                                <Link className="thumbnail" to={`/campuses/${campus.id}`}>
-                                    <img className="campusesImg" src={ campus.imageUrl } />
-                                    <div className="caption">
-                                        <h5>
-                                            <span>{ campus.name }</span>
-                                        </h5>
-                                        <small>{ campus.description }</small>
-                                    </div>
-                                </Link>
+                                <div className="thumbnail" >
+                                    <Link to={`/campuses/${campus.id}`}>
+                                        <img className="campusesImg" src={ campus.imageUrl } />
+                                        <div className="caption">
+                                            <h5>
+                                                <span>{ campus.name }</span>
+                                            </h5>
+                                            <small>{ campus.description }</small>
+                                        </div>
+                                    </Link>
+                                    <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(campus.id)}>
+                                        <span value={campus.id} >Delete</span>
+                                    </button>
+                                </div>
                             </div>
                         )
                     })

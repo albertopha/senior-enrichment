@@ -10,7 +10,8 @@ const initialState = {
   newCampusEntry: {},
   selectedCampus: {},
   selectedStudent: {},
-  studentToDelete: {}
+  studentToDelete: {},
+  campusToDelete: {}
 }
 
 //Action types
@@ -23,6 +24,7 @@ const WRITE_CAMPUS = 'WRITE_CAMPUS';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
 const SELECT_STUDENT = 'SELECT_STUDENT';
 const DELETE_STUDENT = 'DELETE_STUDENT';
+const DELETE_CAMPUS = 'DELETE_CAMPUS';
 
 //Action creators
 export const getStudents = (students) => {
@@ -85,6 +87,13 @@ export const selectCampus = (selectedCampus) => {
   return {
     type: SELECT_CAMPUS,
     selectedCampus
+  }
+}
+
+export const deleteCampus = (campusToDelete) => {
+  return {
+    type: DELETE_CAMPUS,
+    campusToDelete
   }
 }
 
@@ -170,6 +179,24 @@ export const postCampus = (newCampus) => {
   };
 };
 
+//helper function for fetching campus to delete
+const fetchCampusToDelete = (campusId, dispatch) => {
+  return axios.get(`/api/campuses/${campusId}`)
+    .then(res => res.data)
+    .then(campusToDelete => {
+      return dispatch(deleteCampus(campusToDelete));
+    })
+};
+
+export const destroyCampus = (campusId) => {
+  return function thunk(dispatch){
+    fetchCampusToDelete(campusId, dispatch)
+    .then(() => {
+      axios.delete(`/api/campuses/${campusId}`)      
+    })
+}
+}
+
 const rootReducer = function(state = initialState, action) {
   switch(action.type) {
     case GET_STUDENTS:
@@ -192,6 +219,10 @@ const rootReducer = function(state = initialState, action) {
       let studentsSoFar = [...state.students];
       studentsSoFar = studentsSoFar.filter(student => student.id !== action.studentToDelete.id);
       return { ...state, students: studentsSoFar};
+    case DELETE_CAMPUS:
+      let campusSoFar = [...state.campuses];
+      campusSoFar = campusSoFar.filter(campus => campus.id !== action.campusToDelete.id);
+      return { ...state, campuses: campusSoFar};
     default: return state
   }
 };
