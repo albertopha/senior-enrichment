@@ -39,8 +39,9 @@ router.put('/:studentId', (req, res, next) => {
 
     Student.findById(studentId)
     .then(student => {
-        student.update(req.body);
+        return student.update(req.body);
     })
+    .then(newStudent => res.json(newStudent))
     .catch(next);
 });
 

@@ -6,8 +6,6 @@ import axios from 'axios';
 const initialState = {
   students: [],
   campuses: [],
-  newStudentEntry: {},
-  newCampusEntry: {},
   selectedCampus: {},
   selectedStudent: {},
   studentToDelete: {},
@@ -19,8 +17,8 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUSE = 'GET_CAMPUSE';
-const WRITE_STUDENT = 'WRITE_STUDENT';
-const WRITE_CAMPUS = 'WRITE_CAMPUS';
+// const UPDATE_STUDENT = 'UPDATE_STUDENT';
+const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
 const SELECT_STUDENT = 'SELECT_STUDENT';
 const DELETE_STUDENT = 'DELETE_STUDENT';
@@ -41,12 +39,12 @@ export const getStudent = (student) => {
   }
 }
 
-export const writeStudent = (newStudentEntry) => {
-  return {
-    type: WRITE_STUDENT,
-    newStudentEntry
-  }
-}
+// export const updateStudent = (updateStudentEntry) => {
+//   return {
+//     type: UPDATE_STUDENT,
+//     updateStudentEntry
+//   }
+// }
 
 export const selectStudent = (selectedStudent) => {
   return {
@@ -76,10 +74,10 @@ export const getCampus = (campus) => {
   }
 };
 
-export const writeCampus = (newCampusEntry) => {
+export const updateCampus = (updateCampusEntry) => {
   return {
-    type: WRITE_CAMPUS,
-    newCampusEntry
+    type: UPDATE_CAMPUS,
+    updateCampusEntry
   }
 }
 
@@ -194,8 +192,21 @@ export const destroyCampus = (campusId) => {
     .then(() => {
       axios.delete(`/api/campuses/${campusId}`)      
     })
+  }
 }
-}
+
+
+export const putCampus = (campusId, updateCampusEntry) => {
+  return function thunk(dispatch){
+    return axios.put(`/api/campuses/${campusId}`, updateCampusEntry)
+      .then(res => {
+        return res.data})
+      .then(updateCampusEntry => {
+        dispatch(updateCampus(updateCampusEntry));
+      })
+      .catch(console.error);
+  };
+};
 
 const rootReducer = function(state = initialState, action) {
   switch(action.type) {
@@ -203,14 +214,19 @@ const rootReducer = function(state = initialState, action) {
       return { ...state, students: action.students };
     case GET_STUDENT:
       return { ...state, students: [...state.students, action.student]};
-    case WRITE_STUDENT:
-      return { ...state, newStudentEntry: action.newStudentEntry};
+    // case UPDATE_STUDENT:
+    //   return { ...state, newStudentEntry: action.newStudentEntry};
     case GET_CAMPUSES:
       return { ...state, campuses: action.campuses};
     case GET_CAMPUSE:
       return { ...state, campuses: [...state.campuses, action.campus]};
-    case WRITE_CAMPUS:
-      return { ...state, newCampusEntry: action.newCampusEntry};
+    case UPDATE_CAMPUS:
+      const campusToUpdate = action.updateCampusEntry;
+      let newCampuses = state.campuses.map(camp => {
+        if(campusToUpdate.id === camp.id) return campusToUpdate;
+        else return camp;
+      });
+      return { ...state, campuses: newCampuses};
     case SELECT_CAMPUS:
       return { ...state, selectedCampus: action.selectedCampus};
     case SELECT_STUDENT:

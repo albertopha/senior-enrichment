@@ -33,14 +33,15 @@ router.post('/', (req, res, next) => {
     .catch(next);
 });
 
-// PUT /api/campuses/campuseId
+// PUT /api/campuses/campusId
 router.put('/:campusId', (req, res, next) => {
     const campusId = req.params.campusId;
 
     Campus.findById(campusId)
     .then(campus => {
-        campus.update(req.body);
+        return campus.update(req.body);
     })
+    .then(newCampus => res.json(newCampus))
     .catch(next);
 });
 

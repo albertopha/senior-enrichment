@@ -6,6 +6,8 @@ import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
 import CreateStudent from './CreateStudent';
 import CreateCampus from './CreateCampus';
+import EditCampus from './EditCampus';
+import EditStudent from './EditStudent';
 import Footer from './Footer';
 import { fetchCampuses, fetchStudents } from '../reducers';
 import store from '../store';
@@ -19,6 +21,8 @@ export default class Home extends Component {
         store.dispatch(studentsThunk);
     }
     render(){
+        // <Route exact path="/edit/student/:studentId" component={EditStudent} />                            
+        
         return (
             <div id="home-main">
                 <div id='home' className="container-fluid">
@@ -32,6 +36,7 @@ export default class Home extends Component {
                             <Route exact path="/campuses" component={Campuses}/>
                             <Route exact path="/create/students" component={CreateStudent} />
                             <Route exact path="/create/campuses" component={CreateCampus} />
+                            <Route exact path="/edit/campus/:campusId" component={EditCampus} />
                             <Route exact path="/campuses/:campusId" component={SingleCampus}/>
                             <Route exact path="/students" component={Students} />
                             <Route exact path="/students/:studentId" component={SingleStudent} />
