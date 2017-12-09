@@ -1,4 +1,5 @@
 'use strict';
+const Student = require('./student');
 
 const images = [
     'http://med-fom-prep.sites.olt.ubc.ca/files/2013/07/UBC-logo1.jpg',
@@ -28,6 +29,10 @@ const Campus = db.define('campus', {
     },
     description: {
         type: Sequelize.TEXT
+    }
+},{
+    defaultScope: {
+        include: [Student]
     }
 });
 

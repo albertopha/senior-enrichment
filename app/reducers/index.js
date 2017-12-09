@@ -237,8 +237,10 @@ const rootReducer = function(state = initialState, action) {
       return { ...state, students: studentsSoFar};
     case DELETE_CAMPUS:
       let campusSoFar = [...state.campuses];
+      let studentSoFar = [...state.students];
+      studentSoFar = studentSoFar.filter(student => student.campusId !== action.campusToDelete.id);
       campusSoFar = campusSoFar.filter(campus => campus.id !== action.campusToDelete.id);
-      return { ...state, campuses: campusSoFar};
+      return { ...state, students: studentSoFar, campuses: campusSoFar};
     default: return state
   }
 };

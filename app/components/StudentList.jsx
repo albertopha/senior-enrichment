@@ -16,6 +16,7 @@ export default class StudentList extends Component {
 
     componentDidMount() {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+
     }
 
     componentWillUnmount () {
@@ -38,11 +39,11 @@ export default class StudentList extends Component {
                     </thead>
                     <tbody>
                         {
-                            students.map(student => (
+                            students && students.map(student => (
                                 <tr key={student.id}>
                                     <td>{ student.id }</td>
                                     <td>{ student.name }</td>
-                                    <td>{ campuses.find(campus => campus.id === student.campusId).name }</td>
+                                    <td>{ campuses.find(campus => campus.id === student.campusId) && campuses.find(campus => campus.id === student.campusId).name }</td>
                                     <td>
                                     <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(student.id)}>
                                         <span value={student.id} >Delete</span>

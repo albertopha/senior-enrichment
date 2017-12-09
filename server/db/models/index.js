@@ -9,9 +9,8 @@ const db = require('../index');
 	// Exporting all models from here seems like a good idea!
 
 // This is also probably a good place for you to set up your associations
-
-Student.belongsTo(Campus);
 Campus.hasMany(Student, {onDelete: 'cascade', hooks: true});
+Student.belongsTo(Campus);
 
 module.exports = {
 	db,

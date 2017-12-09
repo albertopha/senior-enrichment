@@ -75,7 +75,7 @@ export default class EditCampus extends Component{
                 placeholder="Enter Description"
                 />
                 <span className="input-group-btn">
-                    <button className="btn btn-default" type="submit">Create Campus</button>
+                    <button className="btn btn-default" type="submit">Done</button>
                 </span>
             </div>
     </form>

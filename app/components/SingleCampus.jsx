@@ -32,7 +32,8 @@ export default class SingleCampus extends Component {
     }
     
     render(){
-        const { students, selectedCampus } = this.state;
+        // students.filter(student => student.campusId === selectedCampus.id)
+        const { selectedCampus } = this.state;
 
         return (
         <div className="singlecampus">
@@ -42,8 +43,8 @@ export default class SingleCampus extends Component {
                 </div>
             }
             {
-                students.filter(student => student.campusId === selectedCampus.id)
-                .map(selectedStudent => {
+                
+                selectedCampus.students && selectedCampus.students.map(selectedStudent => {
                     return (
                         <div key={selectedStudent.id}>
                             <ul >
