@@ -1,5 +1,5 @@
 /* combineReducers is not currently used, but eventually should be for modular code :D */
-import { combineReducers } from 'redux'
+// import { combineReducers } from 'redux'
 import axios from 'axios';
 
 //Initial State
@@ -17,7 +17,7 @@ const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUSE = 'GET_CAMPUSE';
-// const UPDATE_STUDENT = 'UPDATE_STUDENT';
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 const SELECT_CAMPUS = 'SELECT_CAMPUS';
 const SELECT_STUDENT = 'SELECT_STUDENT';
@@ -39,12 +39,12 @@ export const getStudent = (student) => {
   }
 }
 
-// export const updateStudent = (updateStudentEntry) => {
-//   return {
-//     type: UPDATE_STUDENT,
-//     updateStudentEntry
-//   }
-// }
+export const updateStudent = (updateStudentEntry) => {
+  return {
+    type: UPDATE_STUDENT,
+    updateStudentEntry
+  }
+}
 
 export const selectStudent = (selectedStudent) => {
   return {
@@ -144,6 +144,19 @@ export const destroyStudent = (studentId) => {
       axios.delete(`/api/students/${studentId}`)      
     })
   }
+};
+
+
+export const putStudent = (studentId, updateStudentEntry) => {
+  return function thunk(dispatch){
+    return axios.put(`/api/students/${studentId}`, updateStudentEntry)
+      .then(res => {
+        return res.data})
+      .then(updateStudentEntry => {
+        dispatch(updateStudent(updateStudentEntry));
+      })
+      .catch(console.error);
+  };
 }
 
 
@@ -214,8 +227,6 @@ const rootReducer = function(state = initialState, action) {
       return { ...state, students: action.students };
     case GET_STUDENT:
       return { ...state, students: [...state.students, action.student]};
-    // case UPDATE_STUDENT:
-    //   return { ...state, newStudentEntry: action.newStudentEntry};
     case GET_CAMPUSES:
       return { ...state, campuses: action.campuses};
     case GET_CAMPUSE:
@@ -235,6 +246,13 @@ const rootReducer = function(state = initialState, action) {
       let studentsSoFar = [...state.students];
       studentsSoFar = studentsSoFar.filter(student => student.id !== action.studentToDelete.id);
       return { ...state, students: studentsSoFar};
+    case UPDATE_STUDENT:
+      const studentToUpdate = action.updateStudentEntry;
+      let newStudents = state.students.map(student => {
+        if(studentToUpdate.id === student.id) return studentToUpdate;
+        else return student;
+      });
+      return {...state, students: newStudents};
     case DELETE_CAMPUS:
       let campusSoFar = [...state.campuses];
       let studentSoFar = [...state.students];

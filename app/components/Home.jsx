@@ -8,6 +8,7 @@ import CreateStudent from './CreateStudent';
 import CreateCampus from './CreateCampus';
 import EditCampus from './EditCampus';
 import EditStudent from './EditStudent';
+import AddStudent from './AddStudent';
 import Footer from './Footer';
 import { fetchCampuses, fetchStudents } from '../reducers';
 import store from '../store';
@@ -37,6 +38,7 @@ export default class Home extends Component {
                             <Route exact path="/create/students" component={CreateStudent} />
                             <Route exact path="/create/campuses" component={CreateCampus} />
                             <Route exact path="/edit/campus/:campusId" component={EditCampus} />
+                            <Route exact path="/campuses/addperson" component={AddStudent} />
                             <Route exact path="/campuses/:campusId" component={SingleCampus}/>
                             <Route exact path="/students" component={Students} />
                             <Route exact path="/students/:studentId" component={SingleStudent} />

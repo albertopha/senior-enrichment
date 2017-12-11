@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import store from '../store';
 import { Link } from 'react-router-dom';
-import { fetchCampus, selectCampus } from '../reducers';
+import { fetchCampus, putCampus, fetchStudent, putStudent } from '../reducers';
 
 export default class SingleCampus extends Component {
     constructor(){
         super();
         this.state = store.getState();
+        this.clickHandler = this.clickHandler.bind(this);
+    }
+
+    clickHandler (studentId, campusId) {
+        const { selectedCampus } = this.state;
+        store.dispatch(putStudent(studentId, {campusId: null}));
     }
 
     fetchingCampus(campusId) {
@@ -32,8 +38,8 @@ export default class SingleCampus extends Component {
     }
     
     render(){
-        // students.filter(student => student.campusId === selectedCampus.id)
-        const { selectedCampus } = this.state;
+        const { selectedCampus, students } = this.state;
+        const studentsFromCampus = students.filter(student => student.campusId === selectedCampus.id);
 
         return (
         <div className="singlecampus">
@@ -44,11 +50,14 @@ export default class SingleCampus extends Component {
             }
             {
                 
-                selectedCampus.students && selectedCampus.students.map(selectedStudent => {
+                studentsFromCampus && studentsFromCampus.map(selectedStudent => {
                     return (
                         <div key={selectedStudent.id}>
                             <ul >
                                 <li><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link></li>
+                                <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(selectedStudent.id, selectedCampus.id)}>
+                                    <span value={selectedStudent.id} >remove</span>
+                                </button>
                             </ul>
                         </div>
                     )

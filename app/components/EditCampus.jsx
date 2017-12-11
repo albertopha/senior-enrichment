@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import store from '../store';
-import { updateCampus, fetchCampus, putCampus } from '../reducers';
-
+import {Link} from 'react-router-dom';
+import {  fetchStudent, fetchCampus, putCampus } from '../reducers';
+ 
 export default class EditCampus extends Component{
     constructor(){
         super();
@@ -11,6 +12,7 @@ export default class EditCampus extends Component{
         this.handleImgChange = this.handleImgChange.bind(this);
         this.handleDescriptionChange =this.handleDescriptionChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
     }
 
     fetchingCampus(campusId) {
@@ -19,7 +21,7 @@ export default class EditCampus extends Component{
 
     componentDidMount() {
         this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-        const campusId = this.props.match.params.campusId;        
+        const campusId = this.props.match.params.campusId;
         this.fetchingCampus(campusId);
     }
 
@@ -31,6 +33,11 @@ export default class EditCampus extends Component{
     handleDescriptionChange(event){
         const newDescription = event.target.value;
         this.setState({newDescription});
+    }
+
+    handleSelectChange(event){
+        const addStudent = event.target.value;
+        store.dispatch(fetchStudent(addStudent));
     }
 
     handleSubmit(event){
@@ -54,6 +61,7 @@ export default class EditCampus extends Component{
     }
 
     render(){
+        const { students } = this.state;
 
         return (
             <form id="update-campus-form" onSubmit={this.handleSubmit}>
@@ -74,9 +82,10 @@ export default class EditCampus extends Component{
                 onChange={this.handleDescriptionChange}
                 placeholder="Enter Description"
                 />
-                <span className="input-group-btn">
-                    <button className="btn btn-default" type="submit">Done</button>
-                </span>
+                <button className="btn btn-default" type="submit">Done</button>
+                <button className="btn btn-default" type="submit">
+                    <Link to="/campuses/addperson">Add Person</Link>
+                </button>
             </div>
     </form>
         )
