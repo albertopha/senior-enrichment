@@ -14,10 +14,10 @@ const students = [
 ]
 
 const campuses = [
-    {name: 'UBC', description: "University of British Columbia"},
-    {name: 'TOLEDO', description: "University of Toledo"},
-    {name: 'Drury', description: "University of Drury"},
-    {name: 'MIAMI', description: "University of Miami"}
+    {name: 'Mars', description: "University of Mars"},
+    {name: 'Jupiter', description: "University of Jupiter"},
+    {name: 'Mercury', description: "University of Mercury"},
+    {name: 'Earth', description: "University of Earth"}
   ];
 
 const seed = () =>

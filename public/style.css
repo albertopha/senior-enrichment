@@ -3,10 +3,20 @@
   
   body {
     background: #222222;
-    padding-bottom: 56px; }
+    padding-bottom: 100%; 
+  }
   
   #main {
-    padding-left: 0; 
+    padding-left: 0;
+  }
+
+  #footer {
+    height: 150px;
+    display: flex;
+  }
+
+  .footers{
+    align-self: flex-end;
   }
 
   #campuseslist {

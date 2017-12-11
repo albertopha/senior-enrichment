@@ -2,10 +2,10 @@
 const Student = require('./student');
 
 const images = [
-    'http://med-fom-prep.sites.olt.ubc.ca/files/2013/07/UBC-logo1.jpg',
-    'http://www.utoledo.edu/offices/marketing/toolkit/images/UT-logo-horizontal-color-gold-rgb-300.jpg',
-    'http://www.drury.edu/uc/logo/DruryVerticalCrest1.jpg',
-    'https://www.miamioh.edu/_files/images/ucm/resources/logo/FSL_186K.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/d/d9/Mercury_in_color_-_Prockter07-edit1.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg',
+    'https://static.pexels.com/photos/2422/sky-earth-galaxy-universe.jpg',
   ];
 
 let count = -1;

@@ -45,29 +45,37 @@ export default class SingleCampus extends Component {
         <div className="singlecampus">
             {
                 <div>
-                    <h3>{ selectedCampus.name }</h3>
+                    <h3>University of { selectedCampus.name }</h3>
                 </div>
             }
-            {
-                
-                studentsFromCampus && studentsFromCampus.map(selectedStudent => {
-                    return (
-                        <div key={selectedStudent.id}>
-                            <ul >
-                                <li><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link>
-                                    <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(selectedStudent.id, selectedCampus.id)}>
+            <table className='table'>            
+                <thead>
+                    <tr>
+                        <th>student Id</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {
+                    studentsFromCampus && studentsFromCampus.map(selectedStudent => {
+                        return (
+                            <tr key={selectedStudent.id}>
+                                <td>{selectedStudent.id}</td>
+                                <td><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link></td>
+                                <td><button className="btn btn-default btn-xs" onClick={() => this.clickHandler(selectedStudent.id, selectedCampus.id)}>
                                         <span value={selectedStudent.id} >remove</span>
                                     </button>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                    )
-                })
-            }
+                                </td>
+                            </tr>
+                        )
+                    })
+                }
+                </tbody>
+            </table>
             <br/>
-            <p> Description: </p>
-            <small>{selectedCampus.description}</small>            
+            <h3> Description: </h3>
+            <h5>{selectedCampus.description}</h5>
         </div>
         )
     }

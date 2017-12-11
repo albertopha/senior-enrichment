@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 const Footer = (props) => {
 
   return (
-    <footer>
-      <div>
-        <div className="pull-left">
+    <footer id='footer'>
+        <div className="pull-left footers">
             <button className="btn btn-default">
                <Link to="/create/campuses">Create Campus</Link>
             </button>
@@ -14,7 +13,6 @@ const Footer = (props) => {
                 <Link to="/create/students">Create Student</Link>
             </button>
         </div>
-      </div>
     </footer>
   );
 }

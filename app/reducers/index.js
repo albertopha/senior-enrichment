@@ -146,7 +146,6 @@ export const destroyStudent = (studentId) => {
   }
 };
 
-
 export const putStudent = (studentId, updateStudentEntry) => {
   return function thunk(dispatch){
     return axios.put(`/api/students/${studentId}`, updateStudentEntry)
