@@ -48,9 +48,10 @@ export default class StudentList extends Component {
                                     <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(student.id)}>
                                         <span value={student.id} >Delete</span>
                                     </button>
+                                    <button className="btn btn-default btn-xs"><Link to={`/edit/student/${student.id}`}>Edit</Link></button>
                                     </td>
                                     <td>
-                                        <Link to={`/students/${student.id}`}>more</Link>
+                                    <button className="btn btn-default btn-xs"><Link to={`/students/${student.id}`}>more</Link></button>
                                     </td>
                                 </tr>
                             ))

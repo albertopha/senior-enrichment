@@ -22,7 +22,6 @@ export default class Home extends Component {
         store.dispatch(studentsThunk);
     }
     render(){
-        // <Route exact path="/edit/student/:studentId" component={EditStudent} />                            
         
         return (
             <div id="home-main">
@@ -38,6 +37,7 @@ export default class Home extends Component {
                             <Route exact path="/create/students" component={CreateStudent} />
                             <Route exact path="/create/campuses" component={CreateCampus} />
                             <Route exact path="/edit/campus/:campusId" component={EditCampus} />
+                            <Route exact path="/edit/student/:studentId" component={EditStudent} />                                                        
                             <Route exact path="/campuses/addperson" component={AddStudent} />
                             <Route exact path="/campuses/:campusId" component={SingleCampus}/>
                             <Route exact path="/students" component={Students} />

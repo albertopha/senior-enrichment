@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import store from '../store';
 import { Link } from 'react-router-dom';
-import { fetchCampus, putCampus, fetchStudent, putStudent } from '../reducers';
+import { fetchCampus, putStudent } from '../reducers';
 
 export default class SingleCampus extends Component {
     constructor(){
@@ -54,10 +54,12 @@ export default class SingleCampus extends Component {
                     return (
                         <div key={selectedStudent.id}>
                             <ul >
-                                <li><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link></li>
-                                <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(selectedStudent.id, selectedCampus.id)}>
-                                    <span value={selectedStudent.id} >remove</span>
-                                </button>
+                                <li><Link to={`/students/${selectedStudent.id}`}>{ selectedStudent.name }</Link>
+                                    <button className="btn btn-default btn-xs" onClick={() => this.clickHandler(selectedStudent.id, selectedCampus.id)}>
+                                        <span value={selectedStudent.id} >remove</span>
+                                    </button>
+                                </li>
+                                
                             </ul>
                         </div>
                     )
